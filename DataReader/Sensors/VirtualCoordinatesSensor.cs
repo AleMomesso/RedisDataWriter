@@ -67,7 +67,7 @@ namespace DataReader.Sensors
 
         public string ToJson()
         {
-            return "{\"latitude\":\"" + GetLatitude() + "\"," + "\"longitude\":\"" + GetLongitude() + "\"}";
+            return "\"latitude\":\"" + GetLatitude() + "\"," + "\"longitude\":\"" + GetLongitude() + "\",";
 
         }
     }

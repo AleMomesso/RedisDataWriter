@@ -10,6 +10,7 @@ namespace DataReader.Sensors
     {
         Random rnd = new Random();
         public int count=0;
+        public int count_fermata = 0;
         public int people = 0;
         public bool isStop;
         public string off;
@@ -26,6 +27,7 @@ namespace DataReader.Sensors
             if ((count % 18) == 0)
             {                
                 isStop = true;
+                count_fermata++;
             }
             else
             {
@@ -45,13 +47,15 @@ namespace DataReader.Sensors
 
             Stop();
 
-            Console.WriteLine(count + " " + isStop);
+            //Console.WriteLine(count + " " + isStop);
 
             if (isStop)
             {
                 off = GetPeopleOff();
                 on = GetPeopleOn();
-                return Convert.ToString((people - Convert.ToInt32(off)) + Convert.ToInt32(on));
+                people = (people - Convert.ToInt32(off)) + Convert.ToInt32(on);
+                return Convert.ToString(people);
+                //return Convert.ToString((people - Convert.ToInt32(off)) + Convert.ToInt32(on));
             }
             else
             {
@@ -98,8 +102,7 @@ namespace DataReader.Sensors
 
         public string ToJson()
         {
-            return "{\"counting\":\"" + GetCount() + "\"," + "\"people left\":\"" + off + "\"," + "\"people enter\":\"" + on + "\"}";
-            
+            return "\"counting\":\"" + GetCount() + "\"," + "\"stop\":\"" + isStop + "\"," + "\"people left\":\"" + off + "\"," + "\"people enter\":\"" + on + "\"}";            
         }
     }
 }
